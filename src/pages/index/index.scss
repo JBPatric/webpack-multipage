@@ -1,0 +1,13 @@
+@import "@/assets/scss/flex";
+body {
+    color: red;
+}
+div {
+    height: 40px;
+    background: url("./img/time.jpg");
+    background-size: 100% 100%;
+}
+a{
+    display: flex;
+    color: green;
+}

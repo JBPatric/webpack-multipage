@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+@mixin widthHeight($w, $h: auto) {
+    width: $w;
+    height: $h;
+}
+
+@mixin leftTop($left, $top) {
+    position: absolute;
+    left: $left;
+    top: $top;
+}
+@mixin leftBottom($left, $bottom) {
+    position: absolute;
+    left: $left;
+    bottom: $bottom;
+}
+@mixin rightTop($right, $top) {
+    position: absolute;
+    right: $right;
+    top: $top;
+}
+@mixin rightBottom($right, $bottom) {
+    position: absolute;
+    right: $right;
+    bottom: $bottom;
+}
+
+@mixin fixedLeftTop($left, $top) {
+    position: fixed;
+    left: $left;
+    top: $top;
+}
+
+
+@mixin background($url) {
+    background-size: 100% 100%;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-image: url($url);
+}
+
+// 多行文字显示省略号
+@mixin textEllipsis($n) {
+    overflow: hidden;
+    @if $n == 1 {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    } @else {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: $n;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        text-align: left;
+    }
+}
+
+@mixin fontGradientColor($startColor, $endColor, $start: 0%, $end: 100%, $orientation: top) {
+    background: -webkit-linear-gradient($orientation, $startColor $start, $endColor $end);    // Chrome10-25,Safari5.1-6
+    @if $orientation == left {
+        background: -webkit-linear-gradient(left, $startColor $start, $endColor $end);
+        background: linear-gradient(to right, $startColor $start, $endColor $end);    // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+    } @else {
+        background: -webkit-linear-gradient(top, $startColor $start, $endColor $end);
+        background: linear-gradient(to bottom, $startColor $start, $endColor $end);    // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+    }
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientColor($startColor, $endColor, $start: 0%, $end: 100%, $orientation: top) {
+    background: $startColor; /* Old browsers */
+    background: -moz-linear-gradient($orientation, $startColor $start, $endColor $end);    // FF3.6-15
+    background: -webkit-linear-gradient($orientation, $startColor $start, $endColor $end);    // Chrome10-25,Safari5.1-6
+    @if $orientation == left {
+        background: -webkit-linear-gradient(left, $startColor $start, $endColor $end);
+        background: linear-gradient(to right, $startColor $start, $endColor $end);    // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=#{$startColor}, endColorstr=#{$endColor}, GradientType=1 );   // IE6-9
+    } @else {
+        background: -webkit-linear-gradient(top, $startColor $start, $endColor $end);
+        background: linear-gradient(to bottom, $startColor $start, $endColor $end);    // W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=#{$startColor}, endColorstr=#{$endColor}, GradientType=0 );   // IE6-9
+    }
+}
